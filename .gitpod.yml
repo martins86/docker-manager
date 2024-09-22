@@ -1,0 +1,62 @@
+# Imagem Docker
+image:
+  file: .gitpod.Dockerfile
+
+# Portas e Ações
+ports:
+  - name: Web App
+    description: Front
+    port: 4200
+    onOpen: open-browser
+    visibility: public
+  - name: GitPod
+    port: 1123
+    onOpen: ignore
+    visibility: private
+  - name: GitPod
+    port: 5900
+    onOpen: ignore
+    visibility: private
+  - name: GitPod
+    port: 6080
+    onOpen: ignore
+    visibility: private
+  - name: GitPod
+    port: 49152
+    onOpen: ignore
+    visibility: private
+  - name: GitPod
+    port: 64120
+    onOpen: ignore
+    visibility: private
+  - name: Java
+    description: Back
+    port: 8080
+    onOpen: open-preview
+
+# Tarefas na Inicialização
+tasks:
+  #- name: Run Angular
+    #before: export NG_CLI_ANALYTICS=ci
+    #init: echo n | npm i -g @angular/cli@13.2.0 && npm i -g commitizen
+    #command: cd crud-angular && npm install && npm run start
+  - name: Run Java
+    init: ./mvnw clean install -U -DskipTests
+    command: ./mvnw spring-boot:run
+
+# Github
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: true
+    addBadge: false
+    addLabel: false
+
+vscode:
+  extensions:
+    - pivotal.vscode-spring-boot
+    - vscjava.vscode-java-pack
